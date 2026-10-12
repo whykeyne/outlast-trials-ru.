@@ -33,7 +33,7 @@
       --anim-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    * { box-sizing: border-box; selection-background-color: var(--red); }
+    * { box-sizing: border-box; }
     ::selection { background: var(--red); color: #fff; }
 
     body {
@@ -46,7 +46,6 @@
 
     .wrap { width: min(800px, 100%); animation: fadeInTop var(--anim-slow); }
     
-    /* Основная карточка */
     .card {
       overflow: hidden; border: 1px solid #473d28; border-radius: 24px;
       background: linear-gradient(145deg, rgba(26,24,20,0.98), rgba(13,13,11,0.99));
@@ -73,7 +72,6 @@
     .tag { display: inline-flex; gap: 8px; align-items: center; border: 1px solid #594b30; border-radius: 999px; padding: 8px 16px; color: var(--gold); font-size: .85rem; font-weight: 700; background: rgba(216,189,120,0.05); letter-spacing: 0.05em; }
     p { color: #d1c9b6; font-size: 1.1rem; line-height: 1.75; margin: 22px 0 32px; font-weight: 400; }
     
-    /* Кнопки главного меню */
     .actions { display: flex; flex-wrap: wrap; gap: 16px; }
     
     .btn { 
@@ -97,7 +95,7 @@
 
     .foot { margin-top: 32px; color: var(--muted); font-size: .8rem; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; border-top: 1px solid rgba(84,75,56,0.2); padding-top: 20px; }
 
-    /* ПЛАВНОЕ МОДАЛЬНОЕ ОКНО */
+    /* МОДАЛЬНОЕ ОКНО */
     .modal-overlay {
       position: fixed; inset: 0; background: rgba(5, 4, 3, 0.85);
       backdrop-filter: blur(8px); display: grid; place-items: center;
@@ -128,7 +126,6 @@
     }
     .modal-close:hover { background: rgba(255,255,255,0.05); color: #fff; }
 
-    /* Форма внутри окна */
     .modal-body { padding: 28px; }
     .form-group { margin-bottom: 20px; position: relative; }
     .form-group label { display: block; margin-bottom: 8px; font-size: 0.88rem; color: #c2baa8; font-weight: 600; letter-spacing: 0.02em; }
@@ -146,13 +143,11 @@
     .modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 12px; }
     .modal-footer .btn { min-height: 48px; padding: 0 24px; font-size: 0.9rem; }
 
-    /* Уведомления статуса отправки */
     #statusMessage { 
       padding: 12px 16px; border-radius: 8px; font-size: 0.92rem; font-weight: 700;
       margin-bottom: 16px; display: none; line-height: 1.4; animation: fadeIn var(--anim-fast);
     }
 
-    /* Анимации */
     @keyframes fadeInTop {
       from { opacity: 0; transform: translateY(-30px); filter: blur(5px); }
       to { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -173,7 +168,6 @@
   <main class="wrap">
     <article class="card">
       <header class="hero">
-        <!-- Исправленный путь с точкой под твой репозиторий -->
         <img src="/outlast-trials-ru./assets/logo.jpg" alt="Outlast Trials RU Community">
         <div class="shade"></div>
         <div class="hero-label">
@@ -187,8 +181,7 @@
         <p>Русскоязычное сообщество для поиска игроков и совместного времяпровождения. Находи напарников, собирай команду и проходи испытания вместе с нами.</p>
         
         <div class="actions">
-          <a class="button btn btn-primary" href="https://discord.gg" target="_blank" rel="noopener noreferrer">✦ Вступить в Discord</a>
-          <!-- Кнопка, открывающая красивое окно поддержки -->
+          <a class="btn btn-primary" href="https://discord.gg" target="_blank" rel="noopener noreferrer">✦ Вступить в Discord</a>
           <button class="btn btn-danger" id="openModalBtn">⚙ Открыть техподдержку</button>
         </div>
         
@@ -206,6 +199,13 @@
       </div>
       
       <div class="modal-body">
-        <!-- Блок статуса отправки запроса -->
         <div id="statusMessage"></div>
-
+        
+        <form id="discordSupportForm">
+          <div class="form-group">
+            <label for="discordId">Ваш Discord ID / Никнейм:</label>
+            <input type="text" id="discordId" required placeholder="Например, whykeyne">
+          </div>
+          
+          <div class="form-group">
+            <label for="reason">Тип Вашего обращения:</label>
