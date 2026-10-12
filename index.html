@@ -1,211 +1,1429 @@
 <!DOCTYPE html>
+
 <html lang="ru">
+
 <head>
-  <meta charset="utf-8">
+
+  <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Outlast Trials [RU] — Community</title>
+
+  <title>Outlast Trials [RU] — Community Terminal</title>
+
   <meta name="description" content="Русскоязычное сообщество The Outlast Trials: поиск игроков, совместные испытания и общение.">
-  <meta name="theme-color" content="#171613">
+
+  <meta name="theme-color" content="#141210">
+
+  <!-- Discord Embed: замени адреса на свои -->
 
   <meta property="og:type" content="website">
+
   <meta property="og:site_name" content="Outlast Trials [RU]">
+
   <meta property="og:title" content="THE OUTLAST TRIALS — RU COMMUNITY">
+
   <meta property="og:description" content="Русскоязычное сообщество для поиска игроков и совместного времяпровождения. Присоединяйся к нам!">
-  <meta property="og:url" content="https://github.io">
-  <meta property="og:image" content="https://github.ioassets/logo.jpg">
+
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/">
+
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/assets/logo.jpg">
+
   <meta property="og:image:width" content="1200">
+
   <meta property="og:image:height" content="630">
+
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    :root { 
-      color-scheme: dark; 
-      --bg: #0b0a08; 
-      --panel: #161512; 
-      --panel-light: #22201b;
-      --gold: #d8bd78; 
-      --gold-dim: #bda361;
-      --red: #a63d3a; 
-      --red-hover: #bd4845;
-      --muted: #9e9684; 
-      --text: #f5f0df;
-      --anim-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      --anim-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    :root {
+
+      color-scheme: dark;
+
+      --bg: #070605;
+
+      --panel: #11100e;
+
+      --panel-border: #30291d;
+
+      --gold: #d8bd78;
+
+      --gold-glow: rgba(216,189,120,.12);
+
+      --red: #8c2e2b;
+
+      --red-glow: rgba(140,46,43,.3);
+
+      --text: #ebdcc5;
+
+      --muted: #7a7366;
+
+      --ease: cubic-bezier(.25,1,.5,1);
+
     }
-    
-    * { box-sizing: border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     ::selection { background: var(--red); color: #fff; }
 
     body {
-      margin: 0; min-height: 100vh; color: var(--text);
-      background: radial-gradient(ellipse at 50% 20%, #292419 0%, transparent 65%), var(--bg);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
-      display: grid; place-items: center; padding: 40px 16px;
-      overflow-x: hidden;
+
+      min-height: 100vh;
+
+      color: var(--text);
+
+      background:
+
+        radial-gradient(circle at 50% 15%, #1f1a12 0%, transparent 60%),
+
+        radial-gradient(circle at 80% 70%, #151812 0%, transparent 50%),
+
+        var(--bg);
+
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      padding: 60px 16px;
+
+      line-height: 1.6;
+
     }
 
-    .wrap { width: min(800px, 100%); animation: fadeInTop var(--anim-slow); }
-    
+    button, input, textarea, select { font: inherit; }
+
+    @keyframes pageIn {
+
+      from { opacity: 0; transform: translateY(25px); }
+
+      to { opacity: 1; transform: translateY(0); }
+
+    }
+
+    .wrap {
+
+      width: min(850px, 100%);
+
+      animation: pageIn .7s var(--ease) both;
+
+    }
+
     .card {
-      overflow: hidden; border: 1px solid #473d28; border-radius: 24px;
-      background: linear-gradient(145deg, rgba(26,24,20,0.98), rgba(13,13,11,0.99));
-      box-shadow: 0 30px 90px rgba(0,0,0,0.85);
-      backdrop-filter: blur(10px);
+
+      overflow: hidden;
+
+      border: 1px solid var(--panel-border);
+
+      border-radius: 24px;
+
+      background: linear-gradient(180deg,#131210,#0d0c0a);
+
+      box-shadow: 0 40px 120px rgba(0,0,0,.8);
+
+      margin-bottom: 32px;
+
+      transition: border-color .3s, box-shadow .3s;
+
     }
-    
-    .hero { position: relative; background: #131210; overflow: hidden; }
-    .hero img { 
-      display: block; width: 100%; max-height: 440px; 
-      object-fit: cover; object-position: center 43%;
-      transition: transform 5s ease;
+
+    .card:hover {
+
+      border-color: #4a3f2c;
+
+      box-shadow: 0 40px 120px rgba(0,0,0,.9), 0 0 30px var(--gold-glow);
+
     }
+
+    .hero {
+
+      position: relative;
+
+      background: #0a0a09;
+
+      height: 360px;
+
+      overflow: hidden;
+
+    }
+
+    .hero img {
+
+      display: block;
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center 43%;
+
+      transition: transform 8s var(--ease);
+
+    }
+
     .card:hover .hero img { transform: scale(1.03); }
-    
-    .shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(11,10,8,1) 0%, rgba(11,10,8,0.4) 50%, transparent 100%); }
-    
-    .hero-label { position: absolute; left: clamp(20px, 5vw, 45px); bottom: 28px; }
-    .eyebrow { color: var(--gold); font-size: .8rem; font-weight: 800; letter-spacing: .3em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-    h1 { margin: 8px 0 0; font-size: clamp(2.2rem, 6.5vw, 4.5rem); line-height: .95; letter-spacing: .01em; text-transform: uppercase; font-weight: 900; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.7)); }
+
+    .shade {
+
+      position: absolute;
+
+      inset: 0;
+
+      background: linear-gradient(0deg,#131210 0%,rgba(19,18,16,.35) 65%,transparent 100%);
+
+    }
+
+    .hero-label {
+
+      position: absolute;
+
+      left: clamp(24px,5vw,44px);
+
+      right: 20px;
+
+      bottom: 24px;
+
+    }
+
+    .eyebrow {
+
+      color: var(--gold);
+
+      font-size: .8rem;
+
+      font-weight: 800;
+
+      letter-spacing: .3em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 8px;
+
+    }
+
+    h1 {
+
+      font-size: clamp(2.2rem,6vw,4.2rem);
+
+      line-height: .98;
+
+      letter-spacing: .02em;
+
+      text-transform: uppercase;
+
+      font-weight: 900;
+
+    }
+
     h1 span { color: var(--gold); }
-    
-    .content { padding: clamp(24px, 5vw, 45px); }
-    .tag { display: inline-flex; gap: 8px; align-items: center; border: 1px solid #594b30; border-radius: 999px; padding: 8px 16px; color: var(--gold); font-size: .85rem; font-weight: 700; background: rgba(216,189,120,0.05); letter-spacing: 0.05em; }
-    p { color: #d1c9b6; font-size: 1.1rem; line-height: 1.75; margin: 22px 0 32px; font-weight: 400; }
-    
-    .actions { display: flex; flex-wrap: wrap; gap: 16px; }
-    
-    .btn { 
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px; 
-      min-height: 54px; padding: 0 28px; border-radius: 12px; text-decoration: none; 
-      font-weight: 800; font-size: 0.95rem; letter-spacing: 0.02em;
-      transition: transform var(--anim-fast), filter var(--anim-fast), box-shadow var(--anim-fast); 
-      border: none; cursor: pointer; font-family: inherit;
-    }
-    .btn:hover { transform: translateY(-3px); }
-    .btn:active { transform: translateY(-1px); }
-    
-    .btn-primary { color: #111; background: linear-gradient(135deg, #ebd496, var(--gold-dim)); box-shadow: 0 8px 24px rgba(216,189,120,0.2); }
-    .btn-primary:hover { box-shadow: 0 12px 28px rgba(216,189,120,0.35); filter: brightness(1.08); }
-    
-    .btn-secondary { color: var(--text); border: 1px solid #544b38; background: rgba(34,32,27,0.5); backdrop-filter: blur(5px); }
-    .btn-secondary:hover { background: rgba(46,44,37,0.8); border-color: var(--gold); }
-    
-    .btn-danger { color: #fff; background: linear-gradient(135deg, var(--red), #732624); box-shadow: 0 8px 24px rgba(166,61,58,0.2); }
-    .btn-danger:hover { box-shadow: 0 12px 28px rgba(166,61,58,0.4); filter: brightness(1.1); }
 
-    .foot { margin-top: 32px; color: var(--muted); font-size: .8rem; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; border-top: 1px solid rgba(84,75,56,0.2); padding-top: 20px; }
+    .content { padding: clamp(24px,5vw,44px); }
 
-    /* МОДАЛЬНОЕ ОКНО */
-    .modal-overlay {
-      position: fixed; inset: 0; background: rgba(5, 4, 3, 0.85);
-      backdrop-filter: blur(8px); display: grid; place-items: center;
-      opacity: 0; pointer-events: none; z-index: 100;
-      transition: opacity var(--anim-slow); padding: 20px;
-    }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .tag {
 
-    .modal-window {
-      background: var(--panel); border: 1px solid #5c4e33; width: min(540px, 100%);
-      border-radius: 20px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,0.9);
-      transform: scale(0.92) translateY(20px); opacity: 0;
-      transition: transform var(--anim-slow), opacity var(--anim-slow);
-    }
-    .modal-overlay.active .modal-window { transform: scale(1) translateY(0); opacity: 1; }
+      display: inline-flex;
 
-    .modal-header { 
-      background: linear-gradient(90deg, #1c1a16, #12110e);
-      padding: 20px 28px; border-bottom: 1px solid #332d20;
-      display: flex; justify-content: space-between; align-items: center;
+      align-items: center;
+
+      gap: 8px;
+
+      border: 1px solid var(--panel-border);
+
+      border-radius: 999px;
+
+      padding: 6px 14px;
+
+      color: var(--gold);
+
+      font-size: .8rem;
+
+      font-weight: 700;
+
+      background: rgba(216,189,120,.02);
+
+      letter-spacing: .05em;
+
     }
-    .modal-header h2 { margin: 0; font-size: 1.25rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; }
-    
+
+    .main-text {
+
+      color: #cfc5b4;
+
+      font-size: 1.05rem;
+
+      margin: 20px 0 28px;
+
+    }
+
+    .actions {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 16px;
+
+      margin-bottom: 40px;
+
+    }
+
+    .btn {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      min-height: 54px;
+
+      padding: 0 24px;
+
+      border-radius: 12px;
+
+      text-decoration: none;
+
+      font-weight: 800;
+
+      font-size: .9rem;
+
+      letter-spacing: .02em;
+
+      text-transform: uppercase;
+
+      transition: transform .2s, filter .2s, box-shadow .2s;
+
+      border: none;
+
+      cursor: pointer;
+
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+
+      color: #0d0c0a;
+
+      background: linear-gradient(135deg,#ebd496,var(--gold));
+
+      box-shadow: 0 6px 20px rgba(216,189,120,.1);
+
+    }
+
+    .btn-primary:hover {
+
+      box-shadow: 0 10px 25px var(--gold-glow);
+
+      filter: brightness(1.08);
+
+    }
+
+    .btn-danger {
+
+      color: #fff;
+
+      background: linear-gradient(135deg,var(--red),#5c1f1d);
+
+      box-shadow: 0 6px 20px rgba(140,46,43,.1);
+
+    }
+
+    .btn-danger:hover {
+
+      box-shadow: 0 10px 25px var(--red-glow);
+
+      filter: brightness(1.1);
+
+    }
+
+    .section-title {
+
+      font-size: 1.05rem;
+
+      color: var(--gold);
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+
+      margin-bottom: 16px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-weight: 800;
+
+    }
+
+    .section-title::after {
+
+      content: '';
+
+      flex: 1;
+
+      height: 1px;
+
+      background: linear-gradient(90deg,rgba(216,189,120,.2),transparent);
+
+    }
+
+    .trials-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+
+      gap: 16px;
+
+      margin-bottom: 12px;
+
+    }
+
+    .trial-item {
+
+      background: #161412;
+
+      border: 1px solid #24211c;
+
+      padding: 18px;
+
+      border-radius: 14px;
+
+      transition: background .2s,border-color .2s;
+
+    }
+
+    .trial-item:hover {
+
+      background: #1c1a16;
+
+      border-color: #3b3425;
+
+    }
+
+    .trial-title {
+
+      color: #fff;
+
+      font-size: .95rem;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      margin-bottom: 6px;
+
+    }
+
+    .trial-desc {
+
+      color: #9c9384;
+
+      font-size: .85rem;
+
+      line-height: 1.6;
+
+    }
+
+    .creators-section {
+
+      margin-top: 48px;
+
+      border-top: 1px solid #24211c;
+
+      padding-top: 32px;
+
+    }
+
+    .creators-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(2,minmax(0,1fr));
+
+      gap: 16px;
+
+      margin-top: 16px;
+
+    }
+
+    .creator-card {
+
+      background: linear-gradient(180deg,#161412,#0f0e0c);
+
+      border: 1px solid #29241c;
+
+      padding: 16px 20px;
+
+      border-radius: 16px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 16px;
+
+      transition: transform .2s,border-color .2s;
+
+    }
+
+    .creator-card:hover {
+
+      transform: translateY(-2px);
+
+      border-color: var(--gold);
+
+    }
+
+    .creator-avatar {
+
+      width: 48px;
+
+      height: 48px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: #24211c;
+
+      border: 1px solid var(--gold);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-weight: 900;
+
+      color: var(--gold);
+
+      font-size: 1.2rem;
+
+    }
+
+    .creator-info { display: flex; flex-direction: column; }
+
+    .creator-name { font-size: 1rem; font-weight: 800; color: #fff; }
+
+    .creator-role {
+
+      font-size: .75rem;
+
+      color: var(--muted);
+
+      text-transform: uppercase;
+
+      letter-spacing: .05em;
+
+      margin-top: 2px;
+
+    }
+
+    .foot {
+
+      margin-top: 40px;
+
+      color: var(--muted);
+
+      font-size: .72rem;
+
+      letter-spacing: .1em;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      text-align: center;
+
+    }
+
+    dialog {
+
+      color: var(--text);
+
+      border: 1px solid var(--panel-border);
+
+      background: var(--panel);
+
+      width: calc(100% - 24px);
+
+      max-width: 520px;
+
+      max-height: 90vh;
+
+      border-radius: 20px;
+
+      margin: auto;
+
+      padding: 0;
+
+      box-shadow: 0 40px 160px rgba(0,0,0,.95);
+
+      overflow-y: auto;
+
+    }
+
+    dialog[open] { animation: pageIn .25s ease both; }
+
+    dialog::backdrop {
+
+      background: rgba(5,4,3,.88);
+
+      backdrop-filter: blur(10px);
+
+      -webkit-backdrop-filter: blur(10px);
+
+    }
+
+    .modal-header {
+
+      background: linear-gradient(90deg,#181613,#0f0e0c);
+
+      padding: 20px 24px;
+
+      border-bottom: 1px solid #2b251b;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 12px;
+
+    }
+
+    .modal-header h2 {
+
+      font-size: 1.05rem;
+
+      color: var(--gold);
+
+      text-transform: uppercase;
+
+      letter-spacing: .06em;
+
+      font-weight: 900;
+
+    }
+
     .modal-close {
-      background: transparent; border: none; color: var(--muted); font-size: 1.6rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      width: 32px; height: 32px; border-radius: 50%; transition: background var(--anim-fast), color var(--anim-fast);
-    }
-    .modal-close:hover { background: rgba(255,255,255,0.05); color: #fff; }
 
-    .modal-body { padding: 28px; }
-    .form-group { margin-bottom: 20px; position: relative; }
-    .form-group label { display: block; margin-bottom: 8px; font-size: 0.88rem; color: #c2baa8; font-weight: 600; letter-spacing: 0.02em; }
-    
-    .form-group input, .form-group textarea, .form-group select {
-      width: 100%; background: #0d0c0a; border: 1px solid #4a3f2a; padding: 14px 16px;
-      border-radius: 8px; color: var(--text); font-family: inherit; font-size: 0.95rem;
-      transition: border-color var(--anim-fast), box-shadow var(--anim-fast);
-    }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      border-color: var(--gold); outline: none; box-shadow: 0 0 10px rgba(216,189,120,0.1);
-    }
-    .form-group textarea { resize: none; }
+      background: transparent;
 
-    .modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 12px; }
-    .modal-footer .btn { min-height: 48px; padding: 0 24px; font-size: 0.9rem; }
+      border: none;
 
-    #statusMessage { 
-      padding: 12px 16px; border-radius: 8px; font-size: 0.92rem; font-weight: 700;
-      margin-bottom: 16px; display: none; line-height: 1.4; animation: fadeIn var(--anim-fast);
+      color: var(--muted);
+
+      font-size: 1.8rem;
+
+      cursor: pointer;
+
+      width: 36px;
+
+      height: 36px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
     }
 
-    @keyframes fadeInTop {
-      from { opacity: 0; transform: translateY(-30px); filter: blur(5px); }
-      to { opacity: 1; transform: translateY(0); filter: blur(0); }
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal-close:hover { background: rgba(255,255,255,.05); color: #fff; }
 
-    @media(max-width: 540px) {
-      body { padding: 16px 12px; }
+    .modal-body { padding: 24px; }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      font-size: .8rem;
+
+      color: #a8a092;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .04em;
+
+    }
+
+    .form-group input,
+
+    .form-group textarea,
+
+    .form-group select {
+
+      width: 100%;
+
+      background: #070605;
+
+      border: 1px solid #3d3527;
+
+      padding: 12px 14px;
+
+      border-radius: 8px;
+
+      color: var(--text);
+
+      font-size: .95rem;
+
+      transition: border-color .2s,box-shadow .2s;
+
+    }
+
+    .form-group input:focus,
+
+    .form-group textarea:focus,
+
+    .form-group select:focus {
+
+      border-color: var(--gold);
+
+      outline: none;
+
+      box-shadow: 0 0 12px rgba(216,189,120,.1);
+
+    }
+
+    .form-group textarea {
+
+      resize: vertical;
+
+      min-height: 120px;
+
+    }
+
+    .form-group select { cursor: pointer; }
+
+    .modal-footer {
+
+      display: flex;
+
+      justify-content: flex-end;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      padding: 0 24px 24px;
+
+    }
+
+    .modal-footer .btn {
+
+      min-height: 46px;
+
+      padding: 0 20px;
+
+      font-size: .82rem;
+
+      border-radius: 8px;
+
+    }
+
+    .btn-cancel {
+
+      color: var(--muted);
+
+      background: transparent;
+
+      border: 1px solid rgba(255,255,255,.1);
+
+    }
+
+    .btn-cancel:hover { background: rgba(255,255,255,.04); color: #fff; }
+
+    #statusMessage {
+
+      padding: 12px 16px;
+
+      border-radius: 8px;
+
+      font-size: .9rem;
+
+      font-weight: 700;
+
+      margin-bottom: 20px;
+
+      display: none;
+
+      line-height: 1.5;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    button:disabled { opacity: .6; cursor: wait; }
+
+    @media(max-width:600px) {
+
+      body { padding: 28px 12px; }
+
+      .hero { height: 290px; }
+
+      .actions { gap: 12px; }
+
       .actions .btn { width: 100%; }
-      .modal-footer { flex-direction: column; }
+
+      .creators-grid { grid-template-columns: 1fr; }
+
+      .modal-footer { flex-direction: column-reverse; }
+
       .modal-footer .btn { width: 100%; }
+
       .modal-body { padding: 20px; }
+
+      .modal-footer { padding: 0 20px 20px; }
+
     }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,*::before,*::after {
+
+        animation-duration: .01ms !important;
+
+        transition-duration: .01ms !important;
+
+        scroll-behavior: auto !important;
+
+      }
+
+    }
+
   </style>
+
 </head>
+
 <body>
 
   <main class="wrap">
+
     <article class="card">
+
       <header class="hero">
-        <img src="/outlast-trials-ru./assets/logo.jpg" alt="Outlast Trials RU Community">
+
+        <!-- Замени на путь к своему баннеру -->
+
+        <img
+
+          src="assets/banner.jpg"
+
+          alt="The Outlast Trials — RU Community"
+
+          onerror="this.style.display='none'"
+
+        >
+
         <div class="shade"></div>
+
         <div class="hero-label">
-          <div class="eyebrow">THE OUTLAST TRIALS</div>
-          <h1><span>RU</span> COMMUNITY</h1>
+
+          <div class="eyebrow">◈ Русскоязычное сообщество</div>
+
+          <h1>THE OUTLAST TRIALS<br><span>RU COMMUNITY</span></h1>
+
         </div>
+
       </header>
-      
-      <section class="content">
-        <div class="tag">◈ РУССКОЯЗЫЧНОЕ СООБЩЕСТВО</div>
-        <p>Русскоязычное сообщество для поиска игроков и совместного времяпровождения. Находи напарников, собирай команду и проходи испытания вместе с нами.</p>
-        
+
+      <div class="content">
+
+        <span class="tag">◈ MURKOFF TERMINAL // RU</span>
+
+        <p class="main-text">
+
+          Русскоязычное сообщество для поиска игроков и совместного
+
+          времяпровождения. Находи напарников, собирай опытную команду
+
+          первоклассных Реагентов и проходи смертоносные испытания
+
+          вместе с нами.
+
+        </p>
+
         <div class="actions">
-          <a class="btn btn-primary" href="https://discord.gg" target="_blank" rel="noopener noreferrer">✦ Вступить в Discord</a>
-          <button class="btn btn-danger" id="openModalBtn">⚙ Открыть техподдержку</button>
+
+          <a
+
+            class="btn btn-primary"
+
+            href="https://discord.gg/aZdapExxN"
+
+            target="_blank"
+
+            rel="noopener noreferrer"
+
+          >✦ Вступить в Discord</a>
+
+          <button class="btn btn-danger" id="openModalBtn" type="button">
+
+            ⚙ Сформировать тикет
+
+          </button>
+
         </div>
-        
-        <div class="foot">OUTLAST TRIALS [RU] · COMMUNITY</div>
-      </section>
+
+        <section aria-labelledby="programsTitle">
+
+          <h2 class="section-title" id="programsTitle">
+
+            Текущие программы мониторинга
+
+          </h2>
+
+          <div class="trials-grid">
+
+            <article class="trial-item">
+
+              <h3 class="trial-title">Программа 1: Мясорубка</h3>
+
+              <p class="trial-desc">
+
+                Испытание базовых рефлексов. Саботаж судебной системы,
+
+                очищение грехов и выживание под надзором Сержанта Койла.
+
+              </p>
+
+            </article>
+
+            <article class="trial-item">
+
+              <h3 class="trial-title">Программа 2: Приют</h3>
+
+              <p class="trial-desc">
+
+                Погружение в детские кошмары. Матушка Гузберри проверит
+
+                вашу верность христианской морали и чистоту помыслов.
+
+              </p>
+
+            </article>
+
+            <article class="trial-item">
+
+              <h3 class="trial-title">Программа 3: Фабрика</h3>
+
+              <p class="trial-desc">
+
+                Координация действий на конвейере смерти. Сборка
+
+                дефектных игрушек и массовая терапия под высоким давлением.
+
+              </p>
+
+            </article>
+
+          </div>
+
+        </section>
+
+        <section class="creators-section" aria-labelledby="staffTitle">
+
+          <h2 class="section-title" id="staffTitle">
+
+            Персонал исследовательского сектора
+
+          </h2>
+
+          <div class="creators-grid">
+
+            <article class="creator-card">
+
+              <div class="creator-avatar" aria-hidden="true">S</div>
+
+              <div class="creator-info">
+
+                <span class="creator-name">@somieh</span>
+
+                <span class="creator-role">Главный разработчик</span>
+
+              </div>
+
+            </article>
+
+            <article class="creator-card">
+
+              <div class="creator-avatar" aria-hidden="true">W</div>
+
+              <div class="creator-info">
+
+                <span class="creator-name">@whykeyne</span>
+
+                <span class="creator-role">Куратор проекта</span>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </section>
+
+        <footer class="foot">
+
+          Outlast Trials [RU] © 2026 · Все права зарезервированы корпорацией Murkoff
+
+        </footer>
+
+      </div>
+
     </article>
+
   </main>
 
-  <!-- МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-window">
+  <!-- Окно создания тикета -->
+
+  <dialog id="supportDialog" aria-labelledby="modalTitle">
+
+    <form id="discordSupportForm">
+
       <div class="modal-header">
-        <h2>Центр обращений</h2>
-        <button class="modal-close" id="closeModalBtn">&times;</button>
+
+        <h2 id="modalTitle">Отправка отчёта Реагента</h2>
+
+        <button
+
+          class="modal-close"
+
+          id="closeModalCross"
+
+          type="button"
+
+          aria-label="Закрыть окно"
+
+        >×</button>
+
       </div>
-      
+
       <div class="modal-body">
-        <div id="statusMessage"></div>
-        
-        <form id="discordSupportForm">
-          <div class="form-group">
-            <label for="discordId">Ваш Discord ID / Никнейм:</label>
-            <input type="text" id="discordId" required placeholder="Например, whykeyne">
-          </div>
-          
-          <div class="form-group">
-            <label for="reason">Тип Вашего обращения:</label>
+
+        <div id="statusMessage" role="status" aria-live="polite"></div>
+
+        <div class="form-group">
+
+          <label for="discordId">Ваш Discord ID / Никнейм</label>
+
+          <input
+
+            id="discordId"
+
+            name="discordId"
+
+            type="text"
+
+            placeholder="Введите ID или @никнейм"
+
+            maxlength="100"
+
+            required
+
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="reason">Тип вашего обращения</label>
+
+          <select id="reason" name="reason" required>
+
+            <option value="" selected disabled>
+
+              Выберите категорию тикета...
+
+            </option>
+
+            <option value="appeal">Апелляция (снятие блокировки / варна)</option>
+
+            <option value="complaint">Обжалование (жалоба на модерацию)</option>
+
+            <option value="other">Другое / рациональное предложение</option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="userMessage">Показания Реагента (суть дела)</label>
+
+          <textarea
+
+            id="userMessage"
+
+            name="userMessage"
+
+            placeholder="Подробно опишите ситуацию..."
+
+            minlength="5"
+
+            maxlength="3500"
+
+            required
+
+          ></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button class="btn btn-cancel" id="closeModalBtn" type="button">
+
+          Отмена
+
+        </button>
+
+        <button class="btn btn-primary" id="submitBtn" type="submit">
+
+          Отправить
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </dialog>
+
+  <script>
+
+    "use strict";
+
+    const supportDialog = document.getElementById("supportDialog");
+
+    const openModalBtn = document.getElementById("openModalBtn");
+
+    const closeModalCross = document.getElementById("closeModalCross");
+
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    const form = document.getElementById("discordSupportForm");
+
+    const statusMessage = document.getElementById("statusMessage");
+
+    const submitBtn = document.getElementById("submitBtn");
+
+    /*
+
+      ВСТАВЬ СЮДА URL DISCORD WEBHOOK.
+
+      ВАЖНО: webhook внутри публичного HTML доступен посетителям сайта.
+
+      Для публичного сайта безопаснее отправлять тикеты через серверный
+
+      обработчик, а URL webhook хранить в секретных переменных сервера.
+
+    */
+
+    const webhookUrl = "ВСТАВЬ_СЮДА_СВОЙ_URL_ВЕБХУКА";
+
+    function showStatus(message, success = false) {
+
+      statusMessage.style.display = "block";
+
+      statusMessage.style.background = success
+
+        ? "rgba(216,189,120,.1)"
+
+        : "rgba(140,46,43,.15)";
+
+      statusMessage.style.border = success
+
+        ? "1px solid var(--gold)"
+
+        : "1px solid var(--red)";
+
+      statusMessage.style.color = success ? "var(--gold)" : "#ff918f";
+
+      statusMessage.textContent = message;
+
+    }
+
+    function hideModal() {
+
+      if (submitBtn.disabled) return;
+
+      supportDialog.close();
+
+      statusMessage.style.display = "none";
+
+      form.reset();
+
+    }
+
+    openModalBtn.addEventListener("click", () => {
+
+      statusMessage.style.display = "none";
+
+      supportDialog.showModal();
+
+    });
+
+    closeModalCross.addEventListener("click", hideModal);
+
+    closeModalBtn.addEventListener("click", hideModal);
+
+    supportDialog.addEventListener("click", (event) => {
+
+      if (event.target === supportDialog) hideModal();
+
+    });
+
+    supportDialog.addEventListener("cancel", (event) => {
+
+      if (submitBtn.disabled) event.preventDefault();
+
+    });
+
+    form.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      if (!form.reportValidity()) return;
+
+      if (
+
+        !webhookUrl.startsWith("https://discord.com/api/webhooks/") &&
+
+        !webhookUrl.startsWith("https://discordapp.com/api/webhooks/")
+
+      ) {
+
+        showStatus(
+
+          "❌ Discord Webhook не настроен. Добавь правильный URL в JavaScript."
+
+        );
+
+        return;
+
+      }
+
+      const discordId = document.getElementById("discordId").value.trim();
+
+      const reasonSelect = document.getElementById("reason");
+
+      const reasonValue = reasonSelect.value;
+
+      const reasonText =
+
+        reasonSelect.options[reasonSelect.selectedIndex].text;
+
+      const userMessage =
+
+        document.getElementById("userMessage").value.trim();
+
+      if (!discordId || !userMessage) {
+
+        showStatus("❌ Заполни все поля перед отправкой.");
+
+        return;
+
+      }
+
+      let embedColor = 14204280;
+
+      let embedIcon = "🛠️";
+
+      if (reasonValue === "appeal") {
+
+        embedColor = 3447003;
+
+        embedIcon = "⚖️";
+
+      } else if (reasonValue === "complaint") {
+
+        embedColor = 10038562;
+
+        embedIcon = "🔥";
+
+      } else if (reasonValue === "other") {
+
+        embedColor = 3066993;
+
+        embedIcon = "💡";
+
+      }
+
+      const isPureId = /^\d{17,20}$/.test(discordId);
+
+      const formattedUser = isPureId
+
+        ? `<@${discordId}> (ID: ${discordId})`
+
+        : discordId;
+
+      const discordPayload = {
+
+        username: "Архив Терминала Murkoff",
+
+        embeds: [{
+
+          title: `${embedIcon} Зарегистрировано новое обращение!`,
+
+          description:
+
+            "В терминал обработки данных поступил новый тикет от пользователя.",
+
+          color: embedColor,
+
+          fields: [
+
+            {
+
+              name: "👤 Фиксация субъекта (Аккаунт)",
+
+              value: formattedUser.slice(0, 500),
+
+              inline: false
+
+            },
+
+            {
+
+              name: "📁 Классификация ситуации",
+
+              value: reasonText.slice(0, 1024),
+
+              inline: true
+
+            },
+
+            {
+
+              name: "🕒 Время фиксации",
+
+              value: `<t:${Math.floor(Date.now() / 1000)}:F>`,
+
+              inline: true
+
+            },
+
+            {
+
+              name: "📝 Расшифровка показаний",
+
+              value: userMessage.length > 1000
+
+                ? userMessage.slice(0, 997) + "..."
+
+                : userMessage,
+
+              inline: false
+
+            }
+
+          ],
+
+          footer: {
+
+            text: "Murkoff Corporation Security Control System"
+
+          },
+
+          timestamp: new Date().toISOString()
+
+        }]
+
+      };
+
+      submitBtn.disabled = true;
+
+      submitBtn.textContent = "Отправка отчёта...";
+
+      try {
+
+        const response = await fetch(webhookUrl, {
+
+          method: "POST",
+
+          headers: { "Content-Type": "application/json" },
+
+          body: JSON.stringify(discordPayload)
+
+        });
+
+        if (!response.ok) {
+
+          throw new Error(`Discord вернул статус ${response.status}`);
+
+        }
+
+        showStatus(
+
+          "✅ Отчёт успешно отправлен. Терминал зарегистрировал обращение.",
+
+          true
+
+        );
+
+        form.reset();
+
+        // Разрешаем закрыть окно после успешной отправки.
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent = "Отправить";
+
+        window.setTimeout(() => {
+
+          if (supportDialog.open) {
+
+            supportDialog.close();
+
+            statusMessage.style.display = "none";
+
+          }
+
+        }, 2200);
+
+      } catch (error) {
+
+        console.error("Ошибка отправки тикета:", error);
+
+        showStatus(
+
+          "❌ Не удалось отправить обращение. Проверь URL вебхука, сеть и настройки Discord."
+
+        );
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent = "Отправить";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
